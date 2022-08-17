@@ -1,0 +1,41 @@
+$size: 16;
+$properties: (
+  "m": "margin",
+  "p": "padding",
+);
+$direction: (
+  "t": "-top",
+  "b": "-bottom",
+  "l": "-left",
+  "r": "-right",
+);
+$operator: (
+  "-": "",
+  "-n": "-",
+);
+
+@for $i from 0 through $size {
+  @each $a, $b in $operator {
+    @each $propertyKey, $property in $properties {
+      @each $value, $key in $direction {
+        .#{$propertyKey + $value + $a + $i} {
+          #{$property + $key}: #{$b + $i * 4}px !important;
+        }
+      }
+
+      .#{$propertyKey + "a" + $a + $i} {
+        #{$property}: #{$b + $i * 4}px;
+      }
+
+      .#{$propertyKey + "y" + $a + $i} {
+        #{$property}-top: #{$b + $i * 4}px;
+        #{$property}-bottom: #{$b + $i * 4}px;
+      }
+
+      .#{$propertyKey + "x" + $a + $i} {
+        #{$property}-left: #{$b + $i * 4}px;
+        #{$property}-right: #{$b + $i * 4}px;
+      }
+    }
+  }
+}
